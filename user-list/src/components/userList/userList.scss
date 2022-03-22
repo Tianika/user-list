@@ -1,0 +1,30 @@
+/* variables */
+$navBg: #bdbdbd;
+$buttonBg: #4b51ef;
+$white: #ffffff;
+
+.user-list {
+  display: flex;
+}
+
+.sort-buttons {
+  width: 152px;
+  padding: 35px 20px;
+  background-color: $navBg;
+}
+
+.sort-title {
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 10px;
+}
+
+.sort-button {
+  color: $white;
+  font-size: 12px;
+  line-height: 14px;
+  background-color: $buttonBg;
+  padding: 5px 15px;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
