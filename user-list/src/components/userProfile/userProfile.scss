@@ -82,3 +82,14 @@
     background: #52cf4f;
   }
 }
+
+.warning {
+  opacity: 0;
+  font-size: 12px;
+  line-height: 14px;
+  color: #d91313;
+
+  &.active {
+    opacity: 1;
+  }
+}

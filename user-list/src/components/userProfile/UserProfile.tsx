@@ -15,6 +15,7 @@ const UserProfile = (props: { userData: User | null }) => {
   const [phone, setPhone] = useState(userData?.phone);
   const [website, setWebsite] = useState(userData?.website);
   const [comment, setComment] = useState('');
+  const [warning, setWarning] = useState(false);
 
   const fields = [
     {
@@ -87,7 +88,18 @@ const UserProfile = (props: { userData: User | null }) => {
   };
 
   const sendUserData = () => {
-    console.log(`
+    if (
+      name &&
+      username &&
+      email &&
+      street &&
+      city &&
+      zipcode &&
+      phone &&
+      website
+    ) {
+      setWarning(false);
+      console.log(`
     Name: ${name}
     User name: ${username}
     E-mail: ${email}
@@ -98,6 +110,9 @@ const UserProfile = (props: { userData: User | null }) => {
     Website: ${website}
     Comment: ${comment}
     `);
+    } else {
+      setWarning(true);
+    }
   };
 
   return (
@@ -135,6 +150,9 @@ const UserProfile = (props: { userData: User | null }) => {
             </div>
           );
         })}
+        <div className={!warning ? 'warning' : 'warning active'}>
+          Перед отправкой заполните все отмеченные поля
+        </div>
       </div>
       <button
         disabled={isNonEditable}
