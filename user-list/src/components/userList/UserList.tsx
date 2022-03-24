@@ -1,8 +1,12 @@
+import { MouseEventHandler } from 'react';
 import { User } from './types';
 import './userList.scss';
 
-const UserList = (props: { users: Array<User | null> }) => {
-  const { users } = props;
+const UserList = (props: {
+  users: Array<User | null>;
+  showInfo: MouseEventHandler<HTMLButtonElement>;
+}) => {
+  const { users, showInfo } = props;
 
   return (
     <div className="user-list-items">
@@ -21,7 +25,9 @@ const UserList = (props: { users: Array<User | null> }) => {
               <div>
                 компания: <span>{user.company.name.toString()}</span>
               </div>
-              <button className="detailed">Подробнее</button>
+              <button className="detailed" onClick={showInfo}>
+                Подробнее
+              </button>
             </div>
           ) : null;
         })

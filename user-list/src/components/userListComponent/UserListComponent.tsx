@@ -2,12 +2,15 @@ import { useEffect, useState } from 'react';
 import SortBar from '../sortBar/SortBar';
 import { User } from '../userList/types';
 import UserList from '../userList/UserList';
+import UserProfile from '../userProfile/UserProfile';
 import './userListComponent.scss';
 
 const UserListComponent = () => {
   let state: Array<User | null> = [];
+  const URL_FOR_FETCH = 'https://jsonplaceholder.typicode.com/users/';
+
   const [users, setUsers] = useState(state);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isDetaled, setIsDetaled] = useState(false);
 
   const sortByCity = () => {
     users.sort((a, b): any => {
@@ -37,21 +40,28 @@ const UserListComponent = () => {
     setUsers([...users]);
   };
 
+  const showInfo = () => {
+    setIsDetaled(true);
+  };
+
   useEffect(() => {
     setTimeout(() => {
-      fetch('https://jsonplaceholder.typicode.com/users/')
+      fetch(URL_FOR_FETCH)
         .then((response: Response) => response.json())
         .then((result: Array<User>) => {
           setUsers([...result]);
-          setIsLoading(true);
         });
-    }, 3000);
+    }, 1000);
   }, []);
 
   return (
     <div className="user-list-component">
       <SortBar sortByCity={sortByCity} sortByCompany={sortByCompany} />
-      <UserList users={users} />
+      {!isDetaled ? (
+        <UserProfile />
+      ) : (
+        <UserList users={users} showInfo={showInfo} />
+      )}
     </div>
   );
 };
