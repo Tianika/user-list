@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { User } from '../userList/types';
 import './userProfile.scss';
 
 const UserProfile = (props: { userData: User | null }) => {
   const { userData } = props;
-  console.log(userData);
 
   const [isNonEditable, setIsNonEditable] = useState(true);
   const [name, setName] = useState(userData?.name);
@@ -21,63 +20,63 @@ const UserProfile = (props: { userData: User | null }) => {
     {
       name: 'Name',
       value: [name],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);
       },
     },
     {
       name: 'User name',
       value: [username],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
       },
     },
     {
       name: 'E-mail',
       value: [email],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setEmail(event.target.value);
       },
     },
     {
       name: 'Street',
       value: [street],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setStreet(event.target.value);
       },
     },
     {
       name: 'City',
       value: [city],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setCity(event.target.value);
       },
     },
     {
       name: 'Zip code',
       value: [zipcode],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setZipcode(event.target.value);
       },
     },
     {
       name: 'Phone',
       value: [phone],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setPhone(event.target.value);
       },
     },
     {
       name: 'Website',
       value: [website],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setWebsite(event.target.value);
       },
     },
     {
       name: 'Comment',
       value: [comment],
-      func: (event: any) => {
+      func: (event: React.ChangeEvent<HTMLInputElement>) => {
         setComment(event.target.value);
       },
     },
@@ -85,6 +84,20 @@ const UserProfile = (props: { userData: User | null }) => {
 
   const enableEditing = () => {
     setIsNonEditable(false);
+  };
+
+  const sendUserData = () => {
+    console.log(`
+    Name: ${name}
+    User name: ${username}
+    E-mail: ${email}
+    Street: ${street}
+    City: ${city}
+    Zip code: ${zipcode}
+    Phone: ${phone}
+    Website: ${website}
+    Comment: ${comment}
+    `);
   };
 
   return (
@@ -96,7 +109,7 @@ const UserProfile = (props: { userData: User | null }) => {
       <div className="data-container">
         {fields.map((item) => {
           const { name, value, func } = item;
-          console.log(item);
+
           return (
             <div key={name}>
               <div className="data-title">{name}</div>
@@ -126,7 +139,7 @@ const UserProfile = (props: { userData: User | null }) => {
       <button
         disabled={isNonEditable}
         className={isNonEditable ? 'send-button' : 'send-button active'}
-        onClick={() => console.log('click')}
+        onClick={sendUserData}
       >
         Отправить
       </button>

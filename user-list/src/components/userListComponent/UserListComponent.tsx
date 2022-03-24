@@ -14,28 +14,38 @@ const UserListComponent = () => {
   const [userNum, setUserNum] = useState(0);
 
   const sortByCity = () => {
-    users.sort((a, b): any => {
+    users.sort((a, b): number => {
+      let n = 0;
+
       if (a && b) {
-        return a.address.city > b.address.city
-          ? 1
-          : a.address.city < b.address.city
-          ? -1
-          : 0;
+        n =
+          a.address.city > b.address.city
+            ? 1
+            : a.address.city < b.address.city
+            ? -1
+            : 0;
       }
+
+      return n;
     });
 
     setUsers([...users]);
   };
 
   const sortByCompany = () => {
-    users.sort((a, b): any => {
+    users.sort((a, b): number => {
+      let n = 0;
+
       if (a && b) {
-        return a.company.name > b.company.name
-          ? 1
-          : a.company.name < b.company.name
-          ? -1
-          : 0;
+        n =
+          a.company.name > b.company.name
+            ? 1
+            : a.company.name < b.company.name
+            ? -1
+            : 0;
       }
+
+      return n;
     });
 
     setUsers([...users]);
@@ -47,13 +57,11 @@ const UserListComponent = () => {
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      fetch(URL_FOR_FETCH)
-        .then((response: Response) => response.json())
-        .then((result: Array<User>) => {
-          setUsers([...result]);
-        });
-    }, 1000);
+    fetch(URL_FOR_FETCH)
+      .then((response: Response) => response.json())
+      .then((result: Array<User>) => {
+        setUsers([...result]);
+      });
   }, []);
 
   return (
