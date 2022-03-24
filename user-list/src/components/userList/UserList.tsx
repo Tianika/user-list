@@ -13,7 +13,7 @@ const UserList = (props: {
       <p className="user-list-title">Список пользователей</p>
 
       {users.length > 0 ? (
-        users.map((user) => {
+        users.map((user, index) => {
           return user ? (
             <div className="user-card" key={user.name.toString()}>
               <div>
@@ -25,7 +25,7 @@ const UserList = (props: {
               <div>
                 компания: <span>{user.company.name.toString()}</span>
               </div>
-              <button className="detailed" onClick={showInfo}>
+              <button className="detailed" data-id={index} onClick={showInfo}>
                 Подробнее
               </button>
             </div>

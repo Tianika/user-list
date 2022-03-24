@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
+import './userListComponent.scss';
 import SortBar from '../sortBar/SortBar';
 import { User } from '../userList/types';
 import UserList from '../userList/UserList';
 import UserProfile from '../userProfile/UserProfile';
-import './userListComponent.scss';
 
 const UserListComponent = () => {
   let state: Array<User | null> = [];
@@ -11,6 +11,7 @@ const UserListComponent = () => {
 
   const [users, setUsers] = useState(state);
   const [isDetaled, setIsDetaled] = useState(false);
+  const [userNum, setUserNum] = useState(0);
 
   const sortByCity = () => {
     users.sort((a, b): any => {
@@ -40,7 +41,8 @@ const UserListComponent = () => {
     setUsers([...users]);
   };
 
-  const showInfo = () => {
+  const showInfo = (event: any) => {
+    setUserNum(event.target.dataset.id);
     setIsDetaled(true);
   };
 
@@ -57,8 +59,8 @@ const UserListComponent = () => {
   return (
     <div className="user-list-component">
       <SortBar sortByCity={sortByCity} sortByCompany={sortByCompany} />
-      {!isDetaled ? (
-        <UserProfile />
+      {isDetaled ? (
+        <UserProfile userData={users[userNum]} />
       ) : (
         <UserList users={users} showInfo={showInfo} />
       )}
